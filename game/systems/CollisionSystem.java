@@ -11,8 +11,8 @@ public class CollisionSystem extends SystemBase{
 	private void checkEntities(Entity entity, ArrayList<Entity> entities){
 		for(Entity ent : entities){
 			if(entity.getHitbox().intersects(ent.getHitbox())){
-				entity.OnCollision(ent);
-				ent.OnCollision(entity);
+				entity.onCollision(ent);
+				ent.onCollision(entity);
 			}
 		}
 	}

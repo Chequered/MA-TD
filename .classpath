@@ -2,17 +2,17 @@
 <classpath>
 	<classpathentry kind="src" path="game"/>
 	<classpathentry exported="true" kind="lib" path="lib/slick.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/jar/lwjgl.jar">
+	<classpathentry kind="lib" path="C:/Users/Daan/workspace/MA-TD/lib/lwjgl_util.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="TowerDefense/lib/native/windows"/>
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
-	<classpathentry kind="lib" path="lib/jar/jinput.jar">
+	<classpathentry kind="lib" path="C:/Users/Daan/workspace/MA-TD/lib/jinput.jar">
 		<attributes>
 			<attribute name="org.eclipse.jdt.launching.CLASSPATH_ATTR_LIBRARY_PATH_ENTRY" value="Alpha/lib/native/windows"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="jxinput.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Daan/workspace/MA-TD/lib/lwjgl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

@@ -8,16 +8,14 @@ import base.Tower;
 
 public class HeadQuarters extends Tower{
 
-	public HeadQuarters(float x, float y, Image sprite, Image turret) {
-		super(x, y, sprite, turret);
+	public HeadQuarters(float x, float y, Image sprite) {
+		super(x, y, sprite);
 		// TODO Auto-generated constructor stub
 	}
 
 	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
-		// TODO Auto-generated method stub
-		
+	public void update(GameContainer container, int delta) {
+		super.update(container, delta);
 	}
 
 }

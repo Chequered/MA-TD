@@ -23,7 +23,6 @@ public abstract class Entity {
 	protected Shape hitbox;
 	protected boolean visable = true;
 	protected float scale;
-	protected boolean alive = true;
 	
 	protected PrintStream out;
 	
@@ -108,7 +107,7 @@ public abstract class Entity {
 	
 	public abstract void onAttack(int damage);
 
-	public void OnCollision(Entity entity) {
+	public void onCollision(Entity entity) {
 		//Semi abstract
 	}
 	
@@ -133,20 +132,24 @@ public abstract class Entity {
 		return new Vector2f(vX, vY);
 	}
 	
-	public Vector2f getLPosition(){
+	public Vector2f getPosition(){
 		return new Vector2f(x,y);
+	}
+	
+	public boolean exists(){
+		return Engine.instant.entities.contains(this);
 	}
 	
 	public float getDistanceFromEntity(Entity entity){
 		return (float) Math.sqrt((x-entity.getX())*(x-entity.getX()) + (y-entity.getY())*(y-entity.getY()));
 	}
-	
-	public boolean isAlive(){
-		return this.alive;
+	public void kill() {
+		Engine.instant.destroyEntity(this);
 	}
 
-	public void kill() {
-		this.alive = false;
+	public void translate(float x, float y) {
+		this.x += x;
+		this.y += y;
+		this.hitbox.setLocation(hitbox.getX() + x, hitbox.getY() + y);
 	}
-	
 }
