@@ -8,6 +8,7 @@ import base.Entity;
 
 public class GameManager{
 
+	public int gold = 0;
 	
 	public GameManager(){
 		

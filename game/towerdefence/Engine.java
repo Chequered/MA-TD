@@ -9,6 +9,7 @@ import org.newdawn.slick.SlickException;
 import systems.CollisionSystem;
 import systems.RenderSystem;
 import systems.SystemBase;
+import systems.UISystem;
 import base.Camera;
 import base.Entity;
 
@@ -32,6 +33,7 @@ public class Engine {
 		
 		systems.add(new CollisionSystem());
 		systems.add(rs);
+		systems.add(new UISystem());
 		
 	}
 	
@@ -57,7 +59,9 @@ public class Engine {
 		for (Entity entity : entities){
 			entity.render(container, g);
 		}
-		rs.render(container, g);
+		for(SystemBase sys : systems){
+			sys.render(container, g);
+		}
 	}
 	
 	public static void log(String txt){
