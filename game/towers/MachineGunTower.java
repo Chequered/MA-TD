@@ -10,13 +10,13 @@ public class MachineGunTower extends Tower{
 
 	public MachineGunTower(float x, float y, Image sprite, Image turret) {
 		super(x, y, sprite, turret);
-		// TODO Auto-generated constructor stub
+
+		setDefaultStats(hp, damage, range);
 	}
 
-	@Override
-	public void update(GameContainer container, int delta)
-			throws SlickException {
-		// TODO Auto-generated method stub
+	
+	public void update(GameContainer container, int delta) {
+		super.update(container, delta);
 		
 	}
 

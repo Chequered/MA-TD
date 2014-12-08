@@ -18,7 +18,7 @@ public class Enemy extends Entity{
 	protected Shape rangeBox;
 	
 	//Stats
-	protected int hp;
+	protected int hp = 12;
 	protected int damage = 7;
 	protected float movementSpeed = 0.1f;
 	protected float attackSpeed = 0.2f;
@@ -35,12 +35,13 @@ public class Enemy extends Entity{
 	public void update(GameContainer container, int delta)
 			throws SlickException {
 		if(target != null){
-			lookAt(target);
-			moveToTarget();
-			if(inRange){
-				attack();
-			}
-			if(!target.isAlive()){
+			if(target.exists()){
+				lookAt(target);
+				moveToTarget();
+				if(inRange){
+					attack();
+				}
+			}else{
 				seekTarget(Engine.instant.entities);
 			}
 		}else{
@@ -50,8 +51,10 @@ public class Enemy extends Entity{
 
 	@Override
 	public void onAttack(int damage) {
-		// TODO Auto-generated method stub
-		
+		this.hp -= damage;
+		if(hp <= 0){
+			this.kill();
+		}
 	}
 
 	public void setStats(int hp, int damage){

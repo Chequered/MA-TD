@@ -17,6 +17,9 @@ import towers.MachineGunTower;
 
 public class GameState extends BasicGameState {
 
+	public static final float LEVEL_WIDTH = 2000;
+	public static final float LEVEL_HEIGHT = 2000;
+	
 	private Engine _engine;
 	
 	@Override
@@ -24,21 +27,6 @@ public class GameState extends BasicGameState {
 			throws SlickException {
 		
 		_engine = new Engine();
-		
-		Enemy test = new Enemy(300, 300, new Image("assets/people/player.png"));
-		_engine.addEntity(test);
-		
-		Tower tower = new MachineGunTower(200, 100, new Image("assets/tower/tower_base.png"), new Image("assets/tower/tower_turret.png"));
-		_engine.addEntity(tower);
-		tower.setScale(0.3f);
-		
-		//Tower tower2 = new MachineGunTower(500, 220, new Image("assets/tower/tower_base.png"), new Image("assets/tower/tower_turret.png"));
-		//_engine.addEntity(tower2);
-		//tower2.setScale(0.3f);
-		
-		//Tower tower3 = new MachineGunTower(300, 70, new Image("assets/tower/tower_base.png"), new Image("assets/tower/tower_turret.png"));
-		//_engine.addEntity(tower3);
-		//tower3.setScale(0.3f);
 	}
 	
 	@Override
@@ -61,8 +49,13 @@ public class GameState extends BasicGameState {
 			}
 		}
 		if(container.getInput().isMousePressed(0)){
-			Tower tower = new MachineGunTower(container.getInput().getMouseX() + Camera.X, container.getInput().getMouseY() + Camera.Y, new Image("assets/tower/tower_base.png"), new Image("assets/tower/tower_turret.png"));
+			Enemy test = new Enemy(container.getInput().getMouseX(), container.getInput().getMouseY(), new Image("assets/people/player.png"));
+			_engine.addEntity(test);
+		}
+		if(container.getInput().isMousePressed(1)){
+			Tower tower = new MachineGunTower(container.getInput().getMouseX(), container.getInput().getMouseY(), new Image("assets/tower/tower_base.png"), new Image("assets/tower/tower_turret.png"));
 			_engine.addEntity(tower);
+			tower.setScale(0.45f);
 		}
 	}
 	

@@ -1,6 +1,7 @@
 package towerdefence;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
@@ -15,21 +16,26 @@ import base.Entity;
 
 public class Engine {
 
-	public static final String VERSION_NUMBER = "0.0.3"; // Release, Week, Day
+	public static final String VERSION_NUMBER = "0.0.4"; // Release, Week, Day
 	public static final String WINDOW_NAME = "Tower Defence " + VERSION_NUMBER;
 	public static final boolean renderHitboxes = false;
 	
 	public static Engine instant;
 	
 	public ArrayList<Entity> entities = new ArrayList<Entity>();
+	public ArrayList<Entity> entityQueue = new ArrayList<Entity>();
+	public ArrayList<Entity> destroyQueue = new ArrayList<Entity>();	
 	
 	private ArrayList<SystemBase> systems = new ArrayList<SystemBase>();
 	
-	public GameManager gm = new GameManager();
-	public RenderSystem rs = new RenderSystem();
+	public GameManager gm;
+	public RenderSystem rs;
 	
 	public Engine() throws SlickException{
 		instant = this;
+		
+		gm = new GameManager();
+		rs = new RenderSystem();
 		
 		systems.add(new CollisionSystem());
 		systems.add(rs);
@@ -38,8 +44,12 @@ public class Engine {
 	}
 	
 	public void addEntity(Entity entity){
-		entities.add(entity);
+		entityQueue.add(entity);
 		entity.setID(entities.size() + 1);
+	}
+	
+	public void destroyEntity(Entity object){
+		destroyQueue.add(object);
 	}
 	
 	public void update(GameContainer container, int delta) throws SlickException{
@@ -53,15 +63,24 @@ public class Engine {
 			gm.update(container, delta);
 		}
 		Camera.update(container, delta);
+		entities.addAll(entityQueue);
+		entities.removeAll(destroyQueue);
+		entityQueue.clear();
+		destroyQueue.clear();
 	}
 	
 	public void render(GameContainer container, Graphics g) throws SlickException{
+<<<<<<< HEAD
 		for (Entity entity : entities){
 			entity.render(container, g);
 		}
 		for(SystemBase sys : systems){
 			sys.render(container, g);
 		}
+=======
+		gm.render(container, g);
+		rs.render(container, g);
+>>>>>>> origin/master
 	}
 	
 	public static void log(String txt){

@@ -7,7 +7,6 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.geom.Circle;
-import org.newdawn.slick.geom.Shape;
 
 import towerdefence.Engine;
 import towers.Turret;
@@ -15,32 +14,38 @@ import towers.Turret;
 public abstract class Tower extends Entity{
 
 	protected int hp = 50;
-	protected int damage = 2;
-	protected float range = 120;
+	protected int damage = 12;
+	protected float range = 125;
+	protected float attackSpeed = 0.9f;
 	
-	protected Shape rangeBox = new Circle(x, y, range);
 	protected Turret turret;
 	
-	protected ArrayList<Entity> targetsInRange = new ArrayList<Entity>();
+	public Tower(float x, float y, Image base) {
+		super(x, y, base);
+		// TODO Auto-generated constructor stub
+	}
 	
 	public Tower(float x, float y, Image base, Image turret) {
 		super(x, y, base);
 		// TODO Auto-generated constructor stub
-		this.turret = new Turret(x, y, turret);
+		this.turret = new Turret(x, y, turret, this, damage, attackSpeed);
 		Engine.instant.addEntity(this.turret);
 	}
 
 	@Override
-	public abstract void update(GameContainer container, int delta) throws SlickException;
+	public void update(GameContainer container, int delta){
+		if(turret != null){
+			checkTargets();
+		}
+	}
 
 	@Override
 	public void render(GameContainer container, Graphics g)
 			throws SlickException {
 		super.render(container, g);
-		out.println("size:" + targetsInRange.size());
-		g.drawString("" + hp, getWorldX(), getWorldY());
-		if(rangeBox != null){
-			g.draw(rangeBox);			
+		g.drawString("" + hp, x, y);
+		if(hitbox != null){
+			g.draw(hitbox);			
 		}
 	}
 	
@@ -48,7 +53,7 @@ public abstract class Tower extends Entity{
 	public void onAttack(int damage) {
 		this.hp -= damage;
 		if(this.hp <= 0){
-			this.alive = false;
+			kill();
 		}
 	}
 	
@@ -56,37 +61,22 @@ public abstract class Tower extends Entity{
 		this.hp = hp;
 		this.damage = damage;
 		this.range = range;
-		this.rangeBox = new Circle(x, y, range);
+		this.hitbox = new Circle(x, y, range);
 	}
 	
 	@Override
 	public void setPos(float x, float y){
 		super.setPos(x, y);
-		this.rangeBox.setX(x);
-		this.rangeBox.setY(y);
-	}
-	
-	public void shoot(){
-		
-	}
-
-	public Shape getRangeBox(){
-		return rangeBox;
-	}
-	
-	public void addTargetInRange(Entity target){
-		targetsInRange.add(target);
+		this.hitbox.setX(x);
+		this.hitbox.setY(y);
 	}
 	
 	@Override
 	public void kill(){
+		if(turret != null){
+			turret.kill();
+		}
 		super.kill();
-		turret.kill();
-	}
-	
-	@Override
-	public Shape getHitbox(){
-		return this.rangeBox;
 	}
 	
 	@Override
@@ -95,8 +85,16 @@ public abstract class Tower extends Entity{
 		turret.setScale(scale);
 	}
 	
-	public void checkTowers(Entity entity){
-		// check distance to all towers
+	public void checkTargets(){
+		ArrayList<Entity> targetsInRange = new ArrayList<Entity>();
+		for(Entity entity : Engine.instant.entities){
+			if(entity instanceof Enemy){
+				if(entity.getDistanceFromEntity(this) < this.range){
+					targetsInRange.add(entity);
+					turret.checkTargets(targetsInRange);
+				}
+			}
+		}
 	}
 	
 }
