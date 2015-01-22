@@ -15,8 +15,7 @@ import towerdefence.Engine;
 public abstract class Entity {
 	
 	protected int ID;
-	protected float x;
-	protected float y;
+	protected float x, y;
 	protected float width;
 	protected float height;
 	protected Image sprite;

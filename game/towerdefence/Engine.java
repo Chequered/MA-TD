@@ -8,6 +8,7 @@ import org.newdawn.slick.Graphics;
 import org.newdawn.slick.SlickException;
 
 import systems.CollisionSystem;
+import systems.GridSystem;
 import systems.RenderSystem;
 import systems.SystemBase;
 import base.Camera;
@@ -37,8 +38,8 @@ public class Engine {
 		rs = new RenderSystem();
 		
 		systems.add(new CollisionSystem());
+		systems.add(new GridSystem());
 		systems.add(rs);
-		
 	}
 	
 	public void addEntity(Entity entity){

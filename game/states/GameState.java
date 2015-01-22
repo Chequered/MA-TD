@@ -2,18 +2,13 @@ package states;
 
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.Graphics;
-import org.newdawn.slick.Image;
 import org.newdawn.slick.Input;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.state.BasicGameState;
 import org.newdawn.slick.state.StateBasedGame;
 
-import base.Camera;
-import base.Enemy;
-import base.Tower;
 import towerdefence.Engine;
 import towerdefence.Main;
-import towers.MachineGunTower;
 
 public class GameState extends BasicGameState {
 
@@ -47,15 +42,6 @@ public class GameState extends BasicGameState {
 			if(Main.application.isFullscreen()){
 				Main.application.setFullscreen(false);
 			}
-		}
-		if(container.getInput().isMousePressed(0)){
-			Enemy test = new Enemy(container.getInput().getMouseX(), container.getInput().getMouseY(), new Image("assets/people/player.png"));
-			_engine.addEntity(test);
-		}
-		if(container.getInput().isMousePressed(1)){
-			Tower tower = new MachineGunTower(container.getInput().getMouseX(), container.getInput().getMouseY(), new Image("assets/tower/tower_base.png"), new Image("assets/tower/tower_turret.png"));
-			_engine.addEntity(tower);
-			tower.setScale(0.45f);
 		}
 	}
 	

@@ -26,7 +26,6 @@ public class Camera {
 	
 	public static void update(GameContainer container, int delta){
 		if(container.getInput().isKeyDown(Input.KEY_W)){
-			//if(X )
 			translate(0, -1);
 		}
 		if(container.getInput().isKeyDown(Input.KEY_A)){
