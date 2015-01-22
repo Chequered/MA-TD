@@ -3,6 +3,7 @@ package systems;
 import java.util.ArrayList;
 
 import org.newdawn.slick.GameContainer;
+import org.newdawn.slick.Graphics;
 
 import base.Entity;
 
@@ -22,6 +23,12 @@ public class CollisionSystem extends SystemBase{
 		for(Entity entity : entities){
 			checkEntities(entity, entities);
 		}
+		
+	}
+
+	@Override
+	public void render(GameContainer container, Graphics g) {
+		// TODO Auto-generated method stub
 		
 	}
 	

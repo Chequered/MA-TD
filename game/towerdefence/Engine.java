@@ -11,6 +11,7 @@ import systems.CollisionSystem;
 import systems.GridSystem;
 import systems.RenderSystem;
 import systems.SystemBase;
+import systems.UISystem;
 import base.Camera;
 import base.Entity;
 
@@ -40,6 +41,11 @@ public class Engine {
 		systems.add(new CollisionSystem());
 		systems.add(new GridSystem());
 		systems.add(rs);
+<<<<<<< HEAD
+=======
+		systems.add(new UISystem());
+		
+>>>>>>> 6c40e2c174d5084930b6b9283d455ceea08f45f3
 	}
 	
 	public void addEntity(Entity entity){
@@ -69,8 +75,17 @@ public class Engine {
 	}
 	
 	public void render(GameContainer container, Graphics g) throws SlickException{
+<<<<<<< HEAD
+		for (Entity entity : entities){
+			entity.render(container, g);
+		}
+		for(SystemBase sys : systems){
+			sys.render(container, g);
+		}
+=======
 		gm.render(container, g);
 		rs.render(container, g);
+>>>>>>> origin/master
 	}
 	
 	public static void log(String txt){

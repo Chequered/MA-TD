@@ -11,7 +11,11 @@ import base.Tower;
 
 public class GameManager{
 
+<<<<<<< HEAD
+	public int gold = 0;
+=======
 	public HeadQuarters hq;
+>>>>>>> origin/master
 	
 	public GameManager() throws SlickException{
 		hq = new HeadQuarters(Settings.SCREEN_WIDTH / 2, Settings.SCREEN_HEIGHT / 2, new Image("assets/tower/hq.png"));
